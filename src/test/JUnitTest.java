@@ -13,7 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 /**
  * JUnitの基本的な書き方についてまとめたクラス
@@ -193,6 +195,16 @@ class JUnitTest {
 	void timeout() {
 		assertTimeout(Duration.ofSeconds(2), () -> Thread.sleep(1000));
 		assertTimeoutPreemptively(Duration.ofSeconds(2), () -> Thread.sleep(1000));
+	}
+
+	/*
+	 * @RepeatedTest
+	 * テストの繰り返しを行うときに使う
+	 */
+	@RepeatedTest(5)
+	@DisplayName("repeated")
+	void repeated(TestInfo info) {
+		System.out.println(info.getDisplayName());
 	}
 
 	/*
