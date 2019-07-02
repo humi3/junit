@@ -1,7 +1,5 @@
 package unitTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +13,6 @@ class SampleTest {
 	@Test
 	@DisplayName("isEven test")
 	void isEvenTest() {
-		assertEquals(Sample.isEven(2), true);
-		assertEquals(Sample.isEven(3), false);
 	}
 
 }
