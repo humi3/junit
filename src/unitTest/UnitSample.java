@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * 体重と身長より体の状態を計算できる。
  */
-public class Sample {
+public class UnitSample {
 
 	private String firstName;
 
@@ -20,11 +20,11 @@ public class Sample {
 
 	private double weight;
 
-	public Sample() {
+	public UnitSample() {
 		super();
 	}
 
-	public Sample(String firstName, String lastName, double height, double weight) {
+	public UnitSample(String firstName, String lastName, double height, double weight) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
