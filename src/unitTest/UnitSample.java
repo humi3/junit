@@ -64,6 +64,13 @@ public class UnitSample {
 		this.weight = weight;
 	}
 
+	/**
+	 * setされているfirstNameとlastNameを使用しFullNameを返します。
+	 * ・両方にデータがない場合は、空文字を返します。
+	 * ・片方にデータがない場合は、データが存在するものしか返しません。
+	 * ・両方にデータがある場合は、半角スペースをはさみデータを返します。
+	 * @return 
+	 */
 	public String getFullName() {
 		if (StringUtils.isEmpty(this.firstName) && StringUtils.isEmpty(lastName)) {
 			return "";
