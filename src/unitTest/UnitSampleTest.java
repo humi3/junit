@@ -7,6 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import mockit.Mock;
+import mockit.MockUp;
+import mockit.Mocked;
+
 /**
  * ユニットテストの練習
  *
@@ -14,6 +18,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Sampleのテストケース")
 class UnitSampleTest {
 
+	@Mocked
 	private UnitSample testSample;
 
 	@BeforeEach
@@ -42,24 +47,24 @@ class UnitSampleTest {
 
 		@Test
 		@DisplayName("empty test")
-		void isEmpty(){
+		void isEmpty() {
 			testSample.setFirstName("");
 			testSample.setLastName("");
-			assertEquals(testSample.getFullName(),"");
+			assertEquals(testSample.getFullName(), "");
 		}
 
 		@Test
 		@DisplayName("first name only test")
 		void isFirstName() {
 			testSample.setFirstName("鈴木");
-			assertEquals(testSample.getFullName(),"鈴木");
+			assertEquals(testSample.getFullName(), "鈴木");
 		}
 
 		@Test
 		@DisplayName("last name only test")
 		void isLastName() {
 			testSample.setFirstName("一浪");
-			assertEquals(testSample.getFullName(),"一浪");
+			assertEquals(testSample.getFullName(), "一浪");
 		}
 
 		@Test
@@ -69,5 +74,58 @@ class UnitSampleTest {
 			testSample.setLastName("一浪");
 			assertEquals(testSample.getFullName(), "鈴木 一浪");
 		}
+	}
+
+	@Nested
+	@DisplayName("BMI test")
+	class BMItest {
+
+		@BeforeEach
+		void init() {
+			testSample = new UnitSample();
+		}
+
+		@Test
+		@DisplayName("half up up test")
+		void isUp() {
+			testSample.setHeight(100);
+			testSample.setWeight(77.456);
+			assertEquals(testSample.getBMI(), 77.46, 0.01d);
+		}
+
+		@Test
+		@DisplayName("half up down test")
+		void isDown() {
+			testSample.setHeight(100);
+			testSample.setWeight(77.454);
+			assertEquals(testSample.getBMI(), 77.45, 0.01d);
+		}
+
+		@Test
+		@DisplayName("arithmeticException test")
+		void isArithmeticException() {
+			testSample.setHeight(0);
+			assertThrows(ArithmeticException.class, () -> testSample.getBMI());
+		}
+	}
+
+	@Nested
+	@DisplayName("degree of obesity test")
+	class degreeOfObesityTest {
+
+		@Test
+		void isUnderweight() {
+			new MockUp<UnitSample>() {
+				@Mock
+				double getBMI() {
+					return 18.4;
+				}
+			};
+
+			String val = new UnitSample().getDegreeOfObesity();
+
+			assertEquals(val, "痩せ型");
+		}
+
 	}
 }
