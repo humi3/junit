@@ -7,8 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import mockit.Mock;
-import mockit.MockUp;
+import mockit.Expectations;
 import mockit.Mocked;
 
 /**
@@ -114,17 +113,24 @@ class UnitSampleTest {
 	class degreeOfObesityTest {
 
 		@Test
-		void isUnderweight() {
-			new MockUp<UnitSample>() {
-				@Mock
-				double getBMI() {
-					return 18.4;
+		void isUnderweight(@Mocked UnitSample sample) {
+			//			new MockUp<UnitSample>() {
+			//				@Mock
+			//				double getBMI() {
+			//					return 18.4;
+			//				}
+			//			};
+
+			new Expectations() {
+				{
+					sample.getBMI();
+					result = 18.4;
 				}
 			};
 
 			String val = new UnitSample().getDegreeOfObesity();
 
-			assertEquals(val, "痩せ型");
+			assertEquals(sample.getDegreeOfObesity(), "痩せ型");
 		}
 
 	}
