@@ -25,14 +25,17 @@ class UnitSampleTest {
 	}
 
 	/**
-	 * SampleクラスのFullNameメソッドについてテストする。
-	 * テスト内容について
-	 *・firstNameとlastName両方共データがない場合
-	 * →空文字が帰る
-	 *・firstNameまたはlastName片方にデータが有る場合
-	 * →データが存在するデータのみ返す
-	 *・firstName及びlastNameともにデータがある場合
-	 * →半角スペースをはさみfirstName + " " + lastNameのデータを返す
+	 * SampleクラスのgetFullNameメソッドについてテストする。<br>
+	 * <br>
+	 * テスト内容について<br>
+	 *・firstNameとlastName両方共データがない場合<br>
+	 * →空文字が帰る<br>
+	 *
+	 *・firstNameまたはlastName片方にデータが有る場合<br>
+	 * →データが存在するデータのみ返す<br>
+	 *
+	 *・firstName及びlastNameともにデータがある場合<br>
+	 * →半角スペースをはさみfirstName + " " + lastNameのデータを返す<br>
 	 */
 	@Nested
 	@DisplayName("full name test")
@@ -74,6 +77,11 @@ class UnitSampleTest {
 		}
 	}
 
+	/**
+	  * SampleクラスのgetBMIメソッドについてテストする。<br>
+	 * <br>
+	 * テスト内容について<br>
+	 */
 	@Nested
 	@DisplayName("BMI test")
 	class BMItest {
@@ -121,7 +129,6 @@ class UnitSampleTest {
 			};
 
 			UnitSample sample = new UnitSample();
-
 			assertEquals(sample.getDegreeOfObesity(), "痩せ型");
 		}
 
