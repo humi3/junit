@@ -6,12 +6,12 @@ import java.math.RoundingMode;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Sampleクラス
- * JUnitの勉強のため作ったクラス。
- *
- * 体重と身長より体の状態を計算できる。
- * height単位(cm)
- * weight単位(kg)
+ * Sampleクラス<br>
+ * JUnitの勉強のため作ったクラス。<br>
+ *<br>
+ * 体重と身長より体の状態を計算できる。<br>
+ * height単位(cm)<br>
+ * weight単位(kg)<br>
  */
 public class UnitSample {
 
@@ -68,9 +68,9 @@ public class UnitSample {
 	}
 
 	/**
-	 * setされているfirstNameとlastNameを使用しFullNameを返します。
-	 * ・両方にデータがない場合は、空文字を返します。
-	 * ・片方にデータがない場合は、データが存在するものしか返しません。
+	 * setされているfirstNameとlastNameを使用しFullNameを返します。<br>
+	 * ・両方にデータがない場合は、空文字を返します。<br>
+	 * ・片方にデータがない場合は、データが存在するものしか返しません。<br>
 	 * ・両方にデータがある場合は、半角スペースをはさみデータを返します。
 	 * @return
 	 */
@@ -104,8 +104,10 @@ public class UnitSample {
 	}
 
 	/**
-	 * BMIの値から肥満度を返します。
-	 * 0の場合は体重か身長が入力されていないのでそのことを返します。
+	 * BMIの値から肥満度を返します。<br>
+	 * 0の場合は体重か身長が入力されていないのでそのことを返します。<br>
+	 * 本来ならUnitやサービスクラスを作成し、BMI値を引数に持たせ比較するのが良いが今回は、<br>
+	 * テストでgetBMI()をmock化し値を固定する方法を練習するためあえてこのような形にしている。
 	 *
 	 * @return 肥満度
 	 */
