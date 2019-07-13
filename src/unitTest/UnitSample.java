@@ -1,14 +1,17 @@
 package unitTest;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Sampleクラス
- * JUnitの勉強のため作ったクラス。
- *
- * 体重と身長より体の状態を計算できる。
+ * Sampleクラス<br>
+ * JUnitの勉強のため作ったクラス。<br>
+ *<br>
+ * 体重と身長より体の状態を計算できる。<br>
+ * height単位(cm)<br>
+ * weight単位(kg)<br>
  */
 public class UnitSample {
 
@@ -65,11 +68,11 @@ public class UnitSample {
 	}
 
 	/**
-	 * setされているfirstNameとlastNameを使用しFullNameを返します。
-	 * ・両方にデータがない場合は、空文字を返します。
-	 * ・片方にデータがない場合は、データが存在するものしか返しません。
+	 * setされているfirstNameとlastNameを使用しFullNameを返します。<br>
+	 * ・両方にデータがない場合は、空文字を返します。<br>
+	 * ・片方にデータがない場合は、データが存在するものしか返しません。<br>
 	 * ・両方にデータがある場合は、半角スペースをはさみデータを返します。
-	 * @return 
+	 * @return
 	 */
 	public String getFullName() {
 		if (StringUtils.isEmpty(this.firstName) && StringUtils.isEmpty(lastName)) {
@@ -84,35 +87,33 @@ public class UnitSample {
 	}
 
 	/**
-	 * weightとheightからBMIの値を返します。
-	 * heightが0の場合計算ができないので0を返します。
+	 * weightとheightからBMIの値を返します。(少数第1位で出力)
 	 *
 	 * @throws ArithmeticException this.height が0の時
-	 * @return BMIの値　ArithmeticException時0
+	 * @return BMIの値
 	 */
 	public double getBMI() {
 		try {
-			BigDecimal bWeight = new BigDecimal(this.weight);
-			BigDecimal powHeight = new BigDecimal(Math.pow(this.height / 100, 2));
-			BigDecimal bmi = bWeight.divide(powHeight);
+			BigDecimal bWeight = BigDecimal.valueOf(this.weight);
+			BigDecimal powHeight = BigDecimal.valueOf(Math.pow(this.height / 100, 2));
+			BigDecimal bmi = bWeight.divide(powHeight, 2, RoundingMode.HALF_UP);
 			return bmi.doubleValue();
 		} catch (ArithmeticException a) {
-			a.getStackTrace();
-			return 0d;
+			throw new ArithmeticException();
 		}
 	}
 
 	/**
-	 * BMIの値から肥満度を返します。
-	 * 0の場合は体重か身長が入力されていないのでそのことを返します。
+	 * BMIの値から肥満度を返します。<br>
+	 * 0の場合は体重か身長が入力されていないのでそのことを返します。<br>
+	 * 本来ならUnitやサービスクラスを作成し、BMI値を引数に持たせ比較するのが良いが今回は、<br>
+	 * テストでgetBMI()をmock化し値を固定する方法を練習するためあえてこのような形にしている。
 	 *
 	 * @return 肥満度
 	 */
 	public String getDegreeOfObesity() {
 		double BMI = getBMI();
-		if (Double.compare(0d, BMI) == 0) {
-			return "体重または身長が入力されてません";
-		} else if (18.5 > BMI) {
+		if (18.5 > BMI) {
 			return "痩せ型";
 		} else if (25 > BMI) {
 			return "普通体重";
